@@ -108,6 +108,7 @@ public class SecurityConfig {
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth
             .antMatchers("/api/auth/**").permitAll()
+            .antMatchers("/api/paper-master/**").permitAll()
             .anyRequest().authenticated()
         )
         .formLogin(form -> form.disable())
