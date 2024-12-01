@@ -102,22 +102,19 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
-        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-        .csrf(csrf -> csrf.disable())
-        .sessionManagement(session ->
-            session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(auth -> auth
-            .antMatchers("/api/auth/**").permitAll()
-            .antMatchers("/api/paper-master/**").permitAll()
-            .antMatchers("/api/shades/**").permitAll()
-            .anyRequest().authenticated()
-        )
-        .formLogin(form -> form.disable())
-        .httpBasic(basic -> basic.disable());
+        .cors().and()
+        .csrf().disable()
+        .sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .authorizeRequests()
+        .antMatchers("/api/**").permitAll() // Permit all requests to /api/**
+        .anyRequest().authenticated()
+        .and()
+        .httpBasic();
 
     return http.build();
   }
-
   @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
