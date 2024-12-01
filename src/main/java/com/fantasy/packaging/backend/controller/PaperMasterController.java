@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/paper-master")
 @Tag(name = "Paper Master", description = "Paper Master Management APIs")
-@CrossOrigin(origins = "http://localhost:3001")  // Adjust this to match your frontend URL
+@CrossOrigin(origins = "http://localhost:3001")
 public class PaperMasterController {
 
   private final PaperMasterService paperMasterService;

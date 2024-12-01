@@ -109,6 +109,7 @@ public class SecurityConfig {
         .authorizeHttpRequests(auth -> auth
             .antMatchers("/api/auth/**").permitAll()
             .antMatchers("/api/paper-master/**").permitAll()
+            .antMatchers("/api/shades/**").permitAll()
             .anyRequest().authenticated()
         )
         .formLogin(form -> form.disable())
