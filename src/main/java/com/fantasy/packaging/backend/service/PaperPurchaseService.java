@@ -71,7 +71,7 @@ public class PaperPurchaseService {
         .build();
   }
 
-  private PaperPurchaseDTO convertToDTO(PaperPurchase entity) {
+  public PaperPurchaseDTO convertToDTO(PaperPurchase entity) {
     return PaperPurchaseDTO.builder()
         .id(entity.getId())
         .date(entity.getDate())

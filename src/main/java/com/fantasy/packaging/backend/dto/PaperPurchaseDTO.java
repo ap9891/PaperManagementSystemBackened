@@ -41,4 +41,9 @@ public class PaperPurchaseDTO {
   private BigDecimal price;
 
   private String remark;
+
+  // New field for days in godown
+  @Min(value = 0)
+  @Max(value = 1000)
+  private Integer days;
 }
