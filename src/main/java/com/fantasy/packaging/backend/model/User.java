@@ -4,6 +4,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -23,4 +24,10 @@ public class User {
 
   private boolean enabled = true;
   private String resetToken;
+
+  private String otp;
+
+  private LocalDateTime otpGeneratedAt;
+
+  private Integer otpAttempts = 0;
 }
