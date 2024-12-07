@@ -28,6 +28,7 @@ public class PaperMasterServiceImpl implements PaperMasterService {
   public PaperMasterDTO createPaperMaster(PaperMasterDTO paperMasterDTO) {
     PaperMaster paperMaster = new PaperMaster();
     BeanUtils.copyProperties(paperMasterDTO, paperMaster);
+    paperMaster.validateEntity();
     paperMaster.generatePartName();
     paperMaster.setPartNumber(generateUniquePartNumber());
 
@@ -44,6 +45,7 @@ public class PaperMasterServiceImpl implements PaperMasterService {
         .orElseThrow(() -> new EntityNotFoundException("Paper Master not found"));
 
     BeanUtils.copyProperties(paperMasterDTO, existingPaperMaster, "id", "partNumber");
+    existingPaperMaster.validateEntity();
     existingPaperMaster.generatePartName();
 
     PaperMaster updatedPaperMaster = paperMasterRepository.save(existingPaperMaster);
