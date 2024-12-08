@@ -1,5 +1,7 @@
 package com.fantasy.packaging.backend.service;
 
+import com.fantasy.packaging.backend.dto.PaperMasterDTO;
+import com.fantasy.packaging.backend.dto.ReelDTO;
 import com.fantasy.packaging.backend.dto.ReelOutRequest;
 import com.fantasy.packaging.backend.entity.PaperPurchase;
 import com.fantasy.packaging.backend.entity.Reel;
@@ -99,6 +101,7 @@ public class ReelService {
     stockOut.setReelNumber(reelNumber);
     stockOut.setPaperName(purchase.getPaperName());
     stockOut.setQuantityUsed(outQuantity);
+    stockOut.setQuantityLeft(purchase.getQuantity() - totalStockOut - outQuantity);
     stockOut.setMillName(purchase.getMillName());
     stockOut.setShade(purchase.getShade());
     stockOut.setRatePerKg(purchase.getRatePerKg());

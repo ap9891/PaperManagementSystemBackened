@@ -26,6 +26,9 @@ public class StockOut {
   @Column(nullable = false)
   private Double quantityUsed;
 
+  @Column(nullable = false)
+  private Double quantityLeft;
+
   @Column(name = "out_timestamp", nullable = false)
   private LocalDateTime outTimestamp = LocalDateTime.now();
 

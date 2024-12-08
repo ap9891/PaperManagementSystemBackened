@@ -41,6 +41,7 @@ public class PaperPurchase {
   @Column(nullable = false)
   private String shade;
 
+  @Min(value = 1, message = "Rate must be at least 1")
   @Column(nullable = false)
   @Digits(integer = 10, fraction = 2)
   private BigDecimal ratePerKg;

@@ -1,8 +1,12 @@
 package com.fantasy.packaging.backend.service;
 
 import com.fantasy.packaging.backend.dto.PaperPurchaseDTO;
+import com.fantasy.packaging.backend.dto.ReelDTO;
 import com.fantasy.packaging.backend.entity.PaperPurchase;
+import com.fantasy.packaging.backend.entity.Reel;
 import com.fantasy.packaging.backend.repository.PaperPurchaseRepository;
+import com.fantasy.packaging.backend.repository.ReelRepository;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PaperPurchaseService {
   private final PaperPurchaseRepository repository;
+  private final ReelRepository reelRepository;
 
   // Generate Reel Number Logic
   public String generateReelNumber() {
@@ -46,6 +51,11 @@ public class PaperPurchaseService {
 
     PaperPurchase purchase = convertToEntity(dto);
     PaperPurchase savedPurchase = repository.save(purchase);
+
+    // Create and save Reel from PaperPurchase
+    ReelDTO reelDTO = ReelDTO.fromPaperPurchase(convertToDTO(savedPurchase));
+    Reel reel = convertReelDtoToEntity(reelDTO);
+    reelRepository.save(reel);
     return convertToDTO(savedPurchase);
   }
 
@@ -85,4 +95,18 @@ public class PaperPurchaseService {
         .remark(entity.getRemark())
         .build();
   }
+  private Reel convertReelDtoToEntity(ReelDTO reelDTO) {
+    Reel reel = new Reel();
+    reel.setReelNumber(reelDTO.getReelNumber());
+    reel.setPaperName(reelDTO.getPaperName());
+    reel.setQuantity(reelDTO.getQuantity());
+    reel.setMillName(reelDTO.getMillName());
+    reel.setShade(reelDTO.getShade());
+    reel.setRate(reelDTO.getRate());
+    reel.setDays(reelDTO.getDays());
+    reel.setIsPartiallyUsed(reelDTO.getIsPartiallyUsed() != null ? reelDTO.getIsPartiallyUsed() : false);
+    reel.setCreatedAt(LocalDateTime.now());
+    return reel;
+  }
+
 }

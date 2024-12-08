@@ -16,16 +16,11 @@ public class InventoryController {
   private final InventoryService inventoryService;
 
   @GetMapping("/search")
-  public ResponseEntity<List<PaperPurchaseDTO>> searchInventory(
-      @RequestParam(required = false) String paperName,
-      @RequestParam(required = false) String shade,
-      @RequestParam(required = false) String reelNumber,
-      @RequestParam(required = false) String millName,
-      @RequestParam(required = false) Integer quantity
+  public ResponseEntity<List<PaperPurchaseDTO>> quickSearchInventory(
+      @RequestParam String searchTerm
   ) {
-    List<PaperPurchaseDTO> inventoryList = inventoryService.searchInventory(
-        paperName, shade, reelNumber, millName, quantity
-    );
+    List<PaperPurchaseDTO> inventoryList = inventoryService.searchPaperPurchases(searchTerm);
     return ResponseEntity.ok(inventoryList);
   }
+
 }

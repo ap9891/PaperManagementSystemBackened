@@ -34,6 +34,7 @@ public class PaperPurchaseDTO {
   @NotBlank(message = "Shade is required")
   private String shade;
 
+  @Min(value = 1, message = "Rate must be at least 1")
   @NotNull(message = "Rate per kg is required")
   @Digits(integer = 10, fraction = 2)
   private BigDecimal ratePerKg;

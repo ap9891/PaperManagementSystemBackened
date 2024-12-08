@@ -16,6 +16,7 @@ public interface ReelRepository extends JpaRepository<Reel, Long> {
   @Query("SELECT r FROM Reel r WHERE " +
       "LOWER(r.paperName) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
       "LOWER(r.reelNumber) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
+      "LOWER(r.millName) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
       "LOWER(r.shade) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
   List<Reel> searchReels(@Param("searchTerm") String searchTerm);
 }
